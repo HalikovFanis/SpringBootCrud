@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>English</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+<main class="container">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-info">
+                    <h5 class="my-0 fw-normal">Past Simple</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Простое прошедшее</h5></li>
+                        <li>"я упал"</li>
+                    </ul>
+                    <form method="get" action="simple/pastSimple/pastSimple">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-info">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-success">
+                    <h5 class="my-0 fw-normal">Present Simple</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Простое настоящее</h5></li>
+                        <li>"обычно я падаю"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-success">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="my-0 fw-normal">Future Simple</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Простое будущее</h5></li>
+                        <li>"я упаду"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-warning">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-info">
+                    <h5 class="my-0 fw-normal">Past Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Длительное прошедшее</h5></li>
+                        <li>"я падал"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-info">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-success">
+                    <h5 class="my-0 fw-normal">Present Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Длительное настоящее</h5></li>
+                        <li>"я сейчас падаю"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-success">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="my-0 fw-normal">Future Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Длительное будущее</h5></li>
+                        <li>"завтра весь день буду падать"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-warning">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-info">
+                    <h5 class="my-0 fw-normal">Past Perfect</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Завершенное прошедшее</h5></li>
+                        <li>"я падал уже тогда"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-info">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-success">
+                    <h5 class="my-0 fw-normal">Present Perfect</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Завершенное настоящее</h5></li>
+                        <li>"я закончил падать"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-success">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="my-0 fw-normal">Future Perfect</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Завершенное будущее</h5></li>
+                        <li>"я закончу падать к вечеру"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-warning">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-info">
+                    <h5 class="my-0 fw-normal">Past Perfect Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Совершенное длительное в прошлом</h5></li>
+                        <li>"я падал два дня"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-info">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-success">
+                    <h5 class="my-0 fw-normal">Present Perfect Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Совершенное длительное в настоящем</h5></li>
+                        <li>"я падаю уже два дня"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-success">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-4 rounded-3 shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="my-0 fw-normal">Future Perfect Continuous</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><h5 class="my-0 fw-normal">Совершенное длительное в будущем</h5></li>
+                        <li>"я планирую падать два дня"</li>
+                    </ul>
+                    <form method="get" action="/A0">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-warning">Перейти к урокам</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="container" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
