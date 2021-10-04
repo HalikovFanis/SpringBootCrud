@@ -1,6 +1,9 @@
 package com.english.springcrud.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -29,9 +32,6 @@ public class Phrase {
     @Column(name = "tense")
     private String tense;
 
-    @Column(name = "formVerb")
+    @Column(name = "form_verb")
     private String formVerb;
-
-    public Phrase() {
-    }
 }
