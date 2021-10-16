@@ -47,20 +47,28 @@ public class SimpleController {
     }
 
     @GetMapping("/pastSimple/pastSimpleCreatePhrase")
-    public String createPhraseForm(Phrase phrase) {
+    public String createPhraseForm(Phrase phrase_rus, Phrase phrase_eng, Model model) {
+        phrase_rus.setRusPhrase("Введите предложение на русском");
+        phrase_eng.setEngPhrase("Add english phrase");
+        model.addAttribute("rusPhrase", phrase_rus);
+        model.addAttribute("engPhrase", phrase_eng);
         return "/simple/pastSimple/pastSimpleCreatePhrase";
     }
 
-    @PostMapping("/pastSimple/pastSimpleCreatePhrase")
-    public String createPhrase(@Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) { return "/simple/pastSimple/pastSimpleCreatePhrase";}
-        phrase.setTense("pastSimple");
+    @PostMapping("/{tense}/pastSimpleCreatePhrase")
+    public String createPhrase(@PathVariable("tense") String tense,
+                                @Valid Phrase phrase, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/simple/{tense}/pastSimpleCreatePhrase";}
+        phrase.setTense(tense);
         phraseService.savePhrase(phrase);
-        return "redirect:/simple/pastSimple/pastSimpleAffirmative";
+        return "redirect:/simple/{tense}/pastSimpleAffirmative";
     }
-    @GetMapping("/pastSimple/delete_phrase/{id}")
-    public String deletePhrase(@PathVariable("id") Long id) {
+
+    @GetMapping("/{tense}/delete_phrase/{id}")
+    public String deletePhrase(@PathVariable("id") Long id,
+                               @PathVariable("tense") String tense) {
         phraseService.deleteById(id);
-        return "redirect:/simple/pastSimple/pastSimpleAffirmative";
+        return "redirect:/simple/{tense}/pastSimpleAffirmative";
     }
 }

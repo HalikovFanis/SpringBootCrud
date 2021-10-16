@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add phrase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+
+<form class="container mt-5" th:action="@{/simple/pastSimple/pastSimpleCreatePhrase}" th:object="${phrase}" method="post">
+    <label for="rusPhrase">Русский</label>
+    <input type="text" th:field="*{rusPhrase}" id="rusPhrase" placeholder="Русский текст" class="form-control">
+    <div style="color: red" th:if="${#fields.hasErrors('rusPhrase')}" th:errors="*{rusPhrase}">Rus error</div>
+    <br>
+    <label for="engPhrase">English</label>
+    <input type="text" th:field="*{engPhrase}" id="engPhrase" placeholder="Английский текст" class="form-control">
+    <div style="color: red" th:if="${#fields.hasErrors('engPhrase')}" th:errors="*{engPhrase}">Eng error</div>
+    <br>
+    <button type="submit" class="w-10 btn btn-outline-info">Добавить фразу</button>
+</form>
+
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

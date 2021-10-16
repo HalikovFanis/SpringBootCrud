@@ -32,6 +32,6 @@ public class Phrase {
     @Column(name = "tense")
     private String tense;
 
-    @Column(name = "form_verb")
-    private String formVerb;
+    @Column(name = "form")
+    private String form;
 }
