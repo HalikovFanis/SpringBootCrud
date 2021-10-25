@@ -55,12 +55,23 @@ public class SimpleController {
         return "/simple/pastSimple/pastSimpleCreatePhrase";
     }
 
-    @PostMapping("/{tense}/pastSimpleCreatePhrase")
+    /*@PostMapping("/{tense}/pastSimpleCreatePhrase")
     public String createPhrase(@PathVariable("tense") String tense,
                                 @Valid Phrase phrase, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/simple/{tense}/pastSimpleCreatePhrase";}
         phrase.setTense(tense);
+        phraseService.savePhrase(phrase);
+        return "redirect:/simple/{tense}/pastSimpleAffirmative";
+    }*/
+    @PostMapping("/{tense}/{form}")
+    public String createPhrase(@PathVariable("tense") String tense,
+                               @PathVariable("form") String form,
+                               @Valid Phrase phrase, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/simple/{tense}/{form}";}
+        phrase.setTense(tense);
+        phrase.setForm(form);
         phraseService.savePhrase(phrase);
         return "redirect:/simple/{tense}/pastSimpleAffirmative";
     }
