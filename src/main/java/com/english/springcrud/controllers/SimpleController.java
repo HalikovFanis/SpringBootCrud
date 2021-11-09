@@ -2,7 +2,6 @@ package com.english.springcrud.controllers;
 
 import com.english.springcrud.models.Phrase;
 import com.english.springcrud.services.PhraseService;
-import lombok.Lombok;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,24 +44,15 @@ public class SimpleController {
         return "simple/pastSimple/pastSimpleQuestions";
     }
 
-    @GetMapping("/pastSimple/pastSimpleCreatePhrase")
+    @GetMapping("/pastSimple/AffirmativeCreate")
     public String createPhraseForm(Phrase phrase_rus, Phrase phrase_eng, Model model) {
         phrase_rus.setRusPhrase("Введите предложение на русском");
         phrase_eng.setEngPhrase("Add english phrase");
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
-        return "/simple/pastSimple/pastSimpleCreatePhrase";
+        return "simple/pastSimple/AffirmativeCreate";
     }
 
-    /*@PostMapping("/{tense}/pastSimpleCreatePhrase")
-    public String createPhrase(@PathVariable("tense") String tense,
-                                @Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/simple/{tense}/pastSimpleCreatePhrase";}
-        phrase.setTense(tense);
-        phraseService.savePhrase(phrase);
-        return "redirect:/simple/{tense}/pastSimpleAffirmative";
-    }*/
     @PostMapping("/{tense}/{form}")
     public String createPhrase(@PathVariable("tense") String tense,
                                @PathVariable("form") String form,
