@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/simple")
+
 public class SimpleController {
 
     private final PhraseService phraseService;
@@ -22,53 +22,84 @@ public class SimpleController {
         this.phraseService = phraseService;
     }
 
-    @GetMapping("pastSimple/pastSimple")
+    @GetMapping("/pastSimple/pastSimple")
     public String pastSimple() {
-        return "simple/pastSimple/pastSimple";
+        return "/pastSimple/pastSimple";
     }
 
-    @GetMapping("pastSimple/pastSimpleAffirmative")
+    @GetMapping("/pastSimple/affirmative")
     public String pastSimpleAffirmative(Model model) {
         List<Phrase> phrases = phraseService.findAll();
         model.addAttribute("phrases", phrases);
-        return "simple/pastSimple/pastSimpleAffirmative";
+        return "pastSimple/affirmative";
     }
 
-    @GetMapping("pastSimple/pastSimpleNegative")
-    public String pastSimpleNegative() {
-        return "simple/pastSimple/pastSimpleNegative";
+    @GetMapping("/pastSimple/questions")
+    public String pastSimpleQuestions(Model model) {
+        List<Phrase> phrases = phraseService.findAllByForm("questionsCreate");
+        model.addAttribute("phrases", phrases);
+        return "pastSimple/questions";
     }
 
-    @GetMapping("pastSimple/pastSimpleQuestions")
-    public String pastSimpleQuestions() {
-        return "simple/pastSimple/pastSimpleQuestions";
+    @GetMapping("/pastSimple/negative")
+    public String pastSimpleNegative(Model model) {
+        List<Phrase> phrases = phraseService.findAllByForm("negativeCreate");
+        model.addAttribute("phrases", phrases);
+        return "pastSimple/negative";
     }
 
-    @GetMapping("/pastSimple/AffirmativeCreate")
-    public String createPhraseForm(Phrase phrase_rus, Phrase phrase_eng, Model model) {
+
+    @GetMapping("/{tense}/{form}")
+    public String createPhraseForm(@PathVariable(value = "tense") String tense,
+                                   @PathVariable(value = "form") String form,
+                                   Phrase phrase_rus, Phrase phrase_eng, Model model) {
         phrase_rus.setRusPhrase("Введите предложение на русском");
         phrase_eng.setEngPhrase("Add english phrase");
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
-        return "simple/pastSimple/AffirmativeCreate";
+        if (form.equals("affirmativeCreate")) {
+            return "pastSimple/affirmativeCreate";
+        } else if (form.equals("questionsCreate")) {
+            return "pastSimple/questionsCreate";
+        } else if (form.equals("negativeCreate")) {
+            return "pastSimple/negativeCreate";
+        }
+        return "pastSimple";
     }
 
     @PostMapping("/{tense}/{form}")
-    public String createPhrase(@PathVariable("tense") String tense,
-                               @PathVariable("form") String form,
+    public String createPhrase(@PathVariable(value = "tense") String tense,
+                               @PathVariable(value = "form") String form,
                                @Valid Phrase phrase, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/simple/{tense}/{form}";}
+            return "/{tense}/{form}";}
         phrase.setTense(tense);
         phrase.setForm(form);
         phraseService.savePhrase(phrase);
-        return "redirect:/simple/{tense}/pastSimpleAffirmative";
+        if (form.equals("affirmativeCreate")) {
+            return "redirect:/{tense}/affirmative";
+        } else if (form.equals("questionsCreate")) {
+            return "redirect:/{tense}/questions";
+        } else if (form.equals("negativeCreate")) {
+            return "redirect:/{tense}/negative";
+        }
+        return "redirect:/{tense}/{tense}";
     }
 
-    @GetMapping("/{tense}/delete_phrase/{id}")
-    public String deletePhrase(@PathVariable("id") Long id,
-                               @PathVariable("tense") String tense) {
+    @GetMapping("/{tense}/delete_phrase/{form}/{id}")
+    public String deletePhrase(@PathVariable(value = "id") Long id,
+                               @PathVariable(value = "tense") String tense,
+                               @PathVariable(value = "form") String form) {
         phraseService.deleteById(id);
-        return "redirect:/simple/{tense}/pastSimpleAffirmative";
+        if (form.equals("affirmativeCreate")) {
+            return "redirect:/{tense}/affirmative";
+        } else if (form.equals("questionsCreate")) {
+            return "redirect:/{tense}/questions";
+        } else if (form.equals("negativeCreate")) {
+            return "redirect:/{tense}/negative";
+        }
+        return "redirect:/{tense}/{tense}";
+
+        //return "redirect:/simple/{tense}/pastSimpleAffirmative";
     }
 }

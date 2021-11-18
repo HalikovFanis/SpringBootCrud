@@ -14,13 +14,12 @@
 <main>
     <header class="container" th:insert="blocks/simple :: pastSimple"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div>Вопросительные предложения. В вопросительном предложении перед подлежащим нужно использовать
-            вспомогательный глагол do в прошедшем времени – did, а после подлежащего поставить основной,
-            значимый глагол в начальной форме
+        <div>Отрицательные предложения. В отрицательных предложениях перед глаголом нужно
+            поставить вспомогательный глагол did и отрицательную частицу not
         </div><br>
-        <h5 th:case="null">Нет записанных фраз!</h5>
+        <h4 th:case="null">Нет записанных фраз!</h4>
         <div th:case="*">
-            <h5>Past Simple вопросительные предложения</h5>
+            <h5>Past Simple отрицательные предложения</h5>
             <hr>
             <table>
                 <thead>
@@ -35,14 +34,14 @@
                     <td></td>
                     <td th:text="${phrase.rusPhrase}"></td>
                     <td th:text="${phrase.engPhrase}"></td>
-                    <td><a th:href="@{edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-primary">Edit</a></td>
+                    <td><a th:href="@{edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
                     <td></td>
-                    <td><a th:href="@{delete_phrase/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-primary">Delete</a></td>
+                    <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/create_phrase" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
+        <p><a href="/pastSimple/negativeCreate" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

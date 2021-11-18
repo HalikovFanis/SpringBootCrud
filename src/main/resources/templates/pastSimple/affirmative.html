@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -10,16 +11,15 @@
 </head>
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
-
 <main>
     <header class="container" th:insert="blocks/simple :: pastSimple"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div>Отрицательные предложения. В отрицательных предложениях перед глаголом нужно
-            поставить вспомогательный глагол did и отрицательную частицу not
+        <div>Утвердительные предложения. Образуется форма прошедшего времени с помощью добавления окончания –ed
+            к правильному глаголу или второй формы из таблицы для неправильных глаголов.
         </div><br>
-        <h4 th:case="null">Нет записанных фраз!</h4>
+        <h5 th:case="null">Нет записанных фраз!</h5>
         <div th:case="*">
-            <h5>Past Simple отрицательные предложения</h5>
+            <h5>Past Simple утвердительные предложения</h5>
             <hr>
             <table>
                 <thead>
@@ -31,17 +31,17 @@
                 </thead>
                 <tbody>
                 <tr th:each="phrase : ${phrases}">
-                    <td></td>
+                    <td th:field="${phrase.id}" type="hidden"></td>
                     <td th:text="${phrase.rusPhrase}"></td>
                     <td th:text="${phrase.engPhrase}"></td>
-                    <td><a th:href="@{edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-primary">Edit</a></td>
+                    <td><a th:href="@{/edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
                     <td></td>
-                    <td><a th:href="@{delete_phrase/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-primary">Delete</a></td>
+                    <td><a th:href="@{delete_phrase/affirmativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/create_phrase" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
+        <p><a href="/pastSimple/affirmativeCreate" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

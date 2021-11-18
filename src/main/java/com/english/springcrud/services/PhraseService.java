@@ -31,4 +31,6 @@ public class PhraseService {
     public void deleteById(Long id) {
         phraseRepo.deleteById(id);
     }
+
+    public List<Phrase> findAllByForm(String form) { return phraseRepo.findAllByForm(form);}
 }
