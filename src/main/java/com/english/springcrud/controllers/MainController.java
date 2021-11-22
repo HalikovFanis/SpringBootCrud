@@ -53,18 +53,18 @@ public class MainController {
         return "redirect:/A0";
     }
 
-    @GetMapping("/edit_phrase/{id}")
-    public String updatePhraseForm(@PathVariable("id") Long id, Model model) {
-        Phrase phrase = phraseService.findById(id);
-        model.addAttribute("phrase", phrase);
-        return "edit_phrase";
-    }
-
-    @PostMapping("/edit_phrase")
-    public String updatePhrase(@Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "/edit_phrase";
-        phraseService.savePhrase(phrase);
-        return "redirect:/A0";
-    }
+//    @GetMapping("/edit_phrase/{id}")
+//    public String updatePhraseForm(@PathVariable("id") Long id, Model model) {
+//        Phrase phrase = phraseService.findById(id);
+//        model.addAttribute("phrase", phrase);
+//        return "edit_phrase";
+//    }
+//
+//    @PostMapping("/edit_phrase")
+//    public String updatePhrase(@Valid Phrase phrase, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors())
+//            return "/edit_phrase";
+//        phraseService.savePhrase(phrase);
+//        return "redirect:/A0";
+//    }
 }

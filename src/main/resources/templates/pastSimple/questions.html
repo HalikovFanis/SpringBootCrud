@@ -35,7 +35,7 @@
                     <td></td>
                     <td th:text="${phrase.rusPhrase}"></td>
                     <td th:text="${phrase.engPhrase}"></td>
-                    <td><a th:href="@{edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
+                    <td><a th:href="@{questionsCreate/edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
                     <td></td>
                     <td><a th:href="@{delete_phrase/questionsCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
                 </tr>

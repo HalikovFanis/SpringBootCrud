@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title>Изменение фразы</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
-    <form class="container mt-5" th:action="@{/edit_phrase}" th:object="${phrase}" method="post">
+    <form class="container mt-5" th:action="@{edit_phrase}" th:object="${phrase}" method="post">
         <input readonly type hidden="number" th:field ="*{id}" id="id" placeholder="ID" class="form-control">
         <br/>
         <label for="rusPhrase">Русский</label>
@@ -18,7 +22,7 @@
         <input type="text" th:field="*{engPhrase}" id="engPhrase" placeholder="Eng phrase" class="form-control">
         <div style="color: red" th:if="${#fields.hasErrors('engPhrase')}" th:errors="*{engPhrase}">Eng error</div>
         <br/>
-        <input type="submit" class="w-10 btn btn-outline-primary" value="Изменить фразу">
+        <input type="submit" class="w-10 btn btn-outline-info" value="Изменить фразу">
     </form>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>
 </body>

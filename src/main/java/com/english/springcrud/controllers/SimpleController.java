@@ -29,7 +29,7 @@ public class SimpleController {
 
     @GetMapping("/pastSimple/affirmative")
     public String pastSimpleAffirmative(Model model) {
-        List<Phrase> phrases = phraseService.findAll();
+        List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate");
         model.addAttribute("phrases", phrases);
         return "pastSimple/affirmative";
     }
@@ -99,7 +99,35 @@ public class SimpleController {
             return "redirect:/{tense}/negative";
         }
         return "redirect:/{tense}/{tense}";
+    }
 
-        //return "redirect:/simple/{tense}/pastSimpleAffirmative";
+    @GetMapping("/{tense}/{form}/edit_phrase/{id}")
+    public String updatePhraseForm(@PathVariable("id") Long id,
+                                   @PathVariable(value = "tense") String tense,
+                                   @PathVariable(value = "form") String form,
+                                   Model model) {
+        Phrase phrase = phraseService.findById(id);
+        model.addAttribute("phrase", phrase);
+        phrase.setTense(tense);
+        return "pastSimple/edit_phrase";
+    }
+
+    @PostMapping("/{tense}/{form}/edit_phrase/edit_phrase")
+    public String updatePhrase(@PathVariable(value = "tense") String tense,
+                               @PathVariable(value = "form") String form,
+                               @Valid Phrase phrase, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "redirect:A0";
+        phrase.setTense(tense);
+        phrase.setForm(form);
+        phraseService.savePhrase(phrase);
+        if (form.equals("affirmativeCreate")) {
+            return "redirect:/{tense}/affirmative";
+        } else if (form.equals("questionsCreate")) {
+            return "redirect:/{tense}/questions";
+        } else if (form.equals("negativeCreate")) {
+            return "redirect:/{tense}/negative";
+        }
+        return "redirect:A0";
     }
 }
