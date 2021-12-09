@@ -26,15 +26,17 @@
                 <tr>
                     <th> </th>
                     <th>Русский</th>
+                    <th></th>
                     <th>English</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="phrase : ${phrases}">
-                    <td></td>
+                    <td th:field="${phrase.id}" type="hidden"></td>
                     <td th:text="${phrase.rusPhrase}"></td>
+                    <td><span> - </span></td>
                     <td th:text="${phrase.engPhrase}"></td>
-                    <td><a th:href="@{negativeCreate/edit_phrase/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
+                    <td><a th:href="@{negativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
                     <td></td>
                     <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
                 </tr>

@@ -57,12 +57,13 @@ public class SimpleController {
         phrase_eng.setEngPhrase("Add english phrase");
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
-        if (form.equals("affirmativeCreate")) {
-            return "pastSimple/affirmativeCreate";
-        } else if (form.equals("questionsCreate")) {
-            return "pastSimple/questionsCreate";
-        } else if (form.equals("negativeCreate")) {
-            return "pastSimple/negativeCreate";
+        switch (form) {
+            case "affirmativeCreate":
+                return "pastSimple/affirmativeCreate";
+            case "questionsCreate":
+                return "pastSimple/questionsCreate";
+            case "negativeCreate":
+                return "pastSimple/negativeCreate";
         }
         return "pastSimple";
     }
@@ -71,17 +72,18 @@ public class SimpleController {
     public String createPhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
                                @Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/{tense}/{form}";}
         phrase.setTense(tense);
         phrase.setForm(form);
+        if (bindingResult.hasErrors()) {
+            return "/{tense}/{form}";}
         phraseService.savePhrase(phrase);
-        if (form.equals("affirmativeCreate")) {
-            return "redirect:/{tense}/affirmative";
-        } else if (form.equals("questionsCreate")) {
-            return "redirect:/{tense}/questions";
-        } else if (form.equals("negativeCreate")) {
-            return "redirect:/{tense}/negative";
+        switch (form) {
+            case "affirmativeCreate":
+                return "redirect:/{tense}/affirmative";
+            case "questionsCreate":
+                return "redirect:/{tense}/questions";
+            case "negativeCreate":
+                return "redirect:/{tense}/negative";
         }
         return "redirect:/{tense}/{tense}";
     }
@@ -91,17 +93,18 @@ public class SimpleController {
                                @PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form) {
         phraseService.deleteById(id);
-        if (form.equals("affirmativeCreate")) {
-            return "redirect:/{tense}/affirmative";
-        } else if (form.equals("questionsCreate")) {
-            return "redirect:/{tense}/questions";
-        } else if (form.equals("negativeCreate")) {
-            return "redirect:/{tense}/negative";
+        switch (form) {
+            case "affirmativeCreate":
+                return "redirect:/{tense}/affirmative";
+            case "questionsCreate":
+                return "redirect:/{tense}/questions";
+            case "negativeCreate":
+                return "redirect:/{tense}/negative";
         }
         return "redirect:/{tense}/{tense}";
     }
 
-    @GetMapping("/{tense}/{form}/edit_phrase/{id}")
+    @GetMapping("/{tense}/{form}/{id}")
     public String updatePhraseForm(@PathVariable("id") Long id,
                                    @PathVariable(value = "tense") String tense,
                                    @PathVariable(value = "form") String form,
@@ -112,22 +115,23 @@ public class SimpleController {
         return "pastSimple/edit_phrase";
     }
 
-    @PostMapping("/{tense}/{form}/edit_phrase/edit_phrase")
+    @PostMapping("/{tense}/{form}/edit_phrase")
     public String updatePhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
                                @Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "redirect:A0";
+        if (bindingResult.hasErrors()) {
+            return "/{tense}/{form}";}
         phrase.setTense(tense);
         phrase.setForm(form);
         phraseService.savePhrase(phrase);
-        if (form.equals("affirmativeCreate")) {
-            return "redirect:/{tense}/affirmative";
-        } else if (form.equals("questionsCreate")) {
-            return "redirect:/{tense}/questions";
-        } else if (form.equals("negativeCreate")) {
-            return "redirect:/{tense}/negative";
+        switch (form) {
+            case "affirmativeCreate":
+                return "redirect:/{tense}/affirmative";
+            case "questionsCreate":
+                return "redirect:/{tense}/questions";
+            case "negativeCreate":
+                return "redirect:/{tense}/negative";
         }
-        return "redirect:A0";
+        return "/{tense}/{form}";
     }
 }
