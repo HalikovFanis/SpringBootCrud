@@ -53,8 +53,6 @@ public class SimpleController {
     public String createPhraseForm(@PathVariable(value = "tense") String tense,
                                    @PathVariable(value = "form") String form,
                                    Phrase phrase_rus, Phrase phrase_eng, Model model) {
-        phrase_rus.setRusPhrase("Введите предложение на русском");
-        phrase_eng.setEngPhrase("Add english phrase");
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
         switch (form) {
@@ -65,7 +63,7 @@ public class SimpleController {
             case "negativeCreate":
                 return "pastSimple/negativeCreate";
         }
-        return "pastSimple";
+        return tense + "/" + tense;
     }
 
     @PostMapping("/{tense}/{form}")
@@ -74,8 +72,10 @@ public class SimpleController {
                                @Valid Phrase phrase, BindingResult bindingResult) {
         phrase.setTense(tense);
         phrase.setForm(form);
+
         if (bindingResult.hasErrors()) {
-            return "/{tense}/{form}";}
+            return tense + "/" + form;}
+
         phraseService.savePhrase(phrase);
         switch (form) {
             case "affirmativeCreate":
@@ -101,7 +101,7 @@ public class SimpleController {
             case "negativeCreate":
                 return "redirect:/{tense}/negative";
         }
-        return "redirect:/{tense}/{tense}";
+        return "redirect:/" + tense + "/" + tense;
     }
 
     @GetMapping("/{tense}/{form}/{id}")
@@ -119,10 +119,11 @@ public class SimpleController {
     public String updatePhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
                                @Valid Phrase phrase, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/{tense}/{form}";}
         phrase.setTense(tense);
         phrase.setForm(form);
+
+        if (bindingResult.hasErrors()) {
+            return tense + "/edit_phrase";}
         phraseService.savePhrase(phrase);
         switch (form) {
             case "affirmativeCreate":
@@ -132,6 +133,6 @@ public class SimpleController {
             case "negativeCreate":
                 return "redirect:/{tense}/negative";
         }
-        return "/{tense}/{form}";
+        return tense + "/" + form;
     }
 }

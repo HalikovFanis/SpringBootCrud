@@ -16,18 +16,10 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/scripts/**")
-                .antMatchers("/styles/**")
-                .antMatchers("/images/**")
-                .antMatchers("/fonts/**");
-    }
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/images/**").permitAll()
+                    .antMatchers("/", "/static/**", "/images/**", "/static/images/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -36,6 +28,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(
+
+                "/css/**",
+                "/js/**",
+                "/fonts/**",
+                "/static/**",
+                "/images/**"
+        );
     }
 
     @Bean
