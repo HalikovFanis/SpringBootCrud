@@ -48,7 +48,6 @@ public class SimpleController {
         return "pastSimple/negative";
     }
 
-
     @GetMapping("/{tense}/{form}")
     public String createPhraseForm(@PathVariable(value = "tense") String tense,
                                    @PathVariable(value = "form") String form,

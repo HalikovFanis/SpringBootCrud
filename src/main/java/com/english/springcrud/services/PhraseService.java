@@ -32,5 +32,10 @@ public class PhraseService {
         phraseRepo.deleteById(id);
     }
 
-    public List<Phrase> findAllByForm(String form) { return phraseRepo.findAllByForm(form);}
+    public List<Phrase> findAllByForm(String form) {
+        if (form != null) {
+            return phraseRepo.findAllByForm(form);
+        }
+        return phraseRepo.findAll();
+    }
 }
