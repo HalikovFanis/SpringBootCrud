@@ -21,7 +21,6 @@
         </div><br>
         <h5 th:case="null">Нет записанных фраз!</h5>
         <div th:case="*">
-<!--            <h5>Past Simple вопросительные предложения</h5>-->
             <table>
                 <thead>
                 <tr>
@@ -33,13 +32,15 @@
                 </thead>
                 <tbody>
                 <tr th:each="phrase : ${phrases}">
-                    <td th:field="${phrase.id}" type="hidden"></td>
-                    <td th:text="${phrase.rusPhrase}" ></td>
-                    <td><span> - </span></td>
-                    <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
-                    <td><a th:href="@{questionsCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
-                    <td></td>
-                    <td><a th:href="@{delete_phrase/questionsCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
+                    <div th:if="${user == phrase.getUser}">
+                        <td th:field="${phrase.id}" type="hidden"></td>
+                        <td th:text="${phrase.rusPhrase}" ></td>
+                        <td><span> - </span></td>
+                        <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
+                        <td><a th:href="@{questionsCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
+                        <td></td>
+                        <td><a th:href="@{delete_phrase/questionsCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
+                    </div>
                 </tr>
                 </tbody>
             </table>

@@ -1,6 +1,8 @@
 package com.english.springcrud.models;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -8,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@RequiredArgsConstructor
 @Table(name = "phrases")
 public class Phrase {
     @Id
@@ -32,4 +35,8 @@ public class Phrase {
 
     @Column(name = "form")
     private String form;
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
 }

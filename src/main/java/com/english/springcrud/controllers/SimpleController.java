@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -23,28 +24,32 @@ public class SimpleController {
     }
 
     @GetMapping("/pastSimple/pastSimple")
-    public String pastSimple() {
+    public String pastSimple(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/pastSimple/pastSimple";
     }
 
     @GetMapping("/pastSimple/affirmative")
-    public String pastSimpleAffirmative(Model model) {
+    public String pastSimpleAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate");
         model.addAttribute("phrases", phrases);
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/affirmative";
     }
 
     @GetMapping("/pastSimple/questions")
-    public String pastSimpleQuestions(Model model) {
+    public String pastSimpleQuestions(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("questionsCreate");
         model.addAttribute("phrases", phrases);
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/questions";
     }
 
     @GetMapping("/pastSimple/negative")
-    public String pastSimpleNegative(Model model) {
+    public String pastSimpleNegative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("negativeCreate");
         model.addAttribute("phrases", phrases);
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/negative";
     }
 
@@ -68,14 +73,14 @@ public class SimpleController {
     @PostMapping("/{tense}/{form}")
     public String createPhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult) {
+                               @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
         phrase.setTense(tense);
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
             return tense + "/" + form;}
 
-        phraseService.savePhrase(phrase);
+        phraseService.savePhrase(principal, phrase);
         switch (form) {
             case "affirmativeCreate":
                 return "redirect:/{tense}/affirmative";
@@ -117,13 +122,13 @@ public class SimpleController {
     @PostMapping("/{tense}/{form}/edit_phrase")
     public String updatePhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult) {
+                               @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
         phrase.setTense(tense);
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
             return tense + "/edit_phrase";}
-        phraseService.savePhrase(phrase);
+        phraseService.savePhrase(principal, phrase);
         switch (form) {
             case "affirmativeCreate":
                 return "redirect:/{tense}/affirmative";

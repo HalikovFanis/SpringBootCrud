@@ -13,19 +13,22 @@
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
 
-<div class="container-fluid" th:if="${param.error}">
-    Неверное имя пользователя или пароль.
+<div class="container mt-2" th:if="${errorMessage}">
+    <p class="btn-outline-info" th:text="${errorMessage}"/>
 </div>
-<div class="container mt-2 btn-outline-info"  th:if="${param.logout}">
-    Вы вышли из системы.
+<div class="container mt-2" th:if="${param.logout}">
+    <p class="btn-outline-info" Вы вышли из системы./>
 </div>
-<form th:action="@{/login}" method="post">
-    <div class="container mt-2"><label> Имя пользователя(email) : <input type="email" name="username"/> </label></div>
-    <div class="container mt-2"><label> Пароль : <input type="password" name="password"/> </label></div>
-    <div class="container mt-2"><input type="submit" class="w-10 btn btn-outline-info" value="Вход"/></div>
-    <div class="container mt-2"><a href="/registration" class="btn-outline-info">Зарегистрироваться</a></div>
-</form>
 
+<form th:action="@{/registration}" method="post">
+<!--    <input type="hidden" name="id">-->
+    <div class="container mt-2"><label> Имя пользователя : <input type="text" name="name"/> </label></div>
+    <div class="container mt-2"><label> E-mail : <input type="email" name="email"/> </label></div>
+    <div class="container mt-2"><label> Номер телефона : <input type="text" name="phoneNumber"/> </label></div>
+    <div class="container mt-2"><label> Пароль : <input type="password" name="password"/> </label></div>
+    <div class="container mt-2"><input type="submit" class="w-10 btn btn-outline-info" value="Зарегистрироваться"/></div>
+    <div class="container mt-2"><a href="/login" class="btn-outline-info">Вход</a></div>
+</form>
 <div class="container" th:insert="blocks/footer :: footer"></div>
 </body>
 </html>

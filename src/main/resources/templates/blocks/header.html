@@ -22,6 +22,11 @@
                             <a href="#" class="nav-link">Словарь</a>
                         </li>
                     </ul>
+                    <div th:if="${user}">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Выйти">
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
