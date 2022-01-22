@@ -52,9 +52,9 @@ public class PhraseService {
         phraseRepo.deleteById(id);
     }
 
-    public List<Phrase> findAllByForm(String form) {
-        if (form != null) {
-            return phraseRepo.findAllByForm(form);
+    public List<Phrase> findAllByForm(String form, String tense) {
+        if (form != null && tense != null) {
+            return phraseRepo.findAllByFormAndTense(form, tense);
         }
         return phraseRepo.findAll();
     }

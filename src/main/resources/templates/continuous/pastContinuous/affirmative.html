@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Past Continuous</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+<main>
+    <header class="container" th:insert="blocks/continuous :: pastContinuous"></header>
+    <div class="container mt-5" th:switch="${phrases}">
+        <div><span class="btn-outline-info">*</span> Утвердительные предложения составляются по формуле при помощи
+            вспомогательных глаголов <b><i>was / were</i></b> (в зависимости от числа) и первой формы глагола.<br>
+            <b><i>I / He / She / It / You / We / They + was / were + Ving I was cooking the dinner</i></b>
+            <hr>
+        </div><br>
+        <h5 th:case="null">Нет записанных фраз!</h5>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Русский</th>
+                    <th></th>
+                    <th>English</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phrase : ${phrases}">
+                    <div th:if="${user == phrase.getUser}">
+                        <td th:field="${phrase.id}" type="hidden"></td>
+                        <td th:text="${phrase.rusPhrase}"></td>
+                        <td><span> - </span></td>
+                        <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
+                        <td><a th:href="@{affirmativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
+                        <td></td>
+                        <td><a th:href="@{delete_phrase/affirmativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/continuous/pastContinuous/affirmativeCreate" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
+    </div>
+</main>
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

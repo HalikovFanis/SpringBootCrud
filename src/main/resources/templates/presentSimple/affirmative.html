@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Present Simple</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+<main>
+    <header class="container" th:insert="blocks/simple :: presentSimple"></header>
+    <div class="container mt-5" th:switch="${phrases}">
+        <div><span class="btn-outline-success">*</span> Утвердительные предложения. Для построения нужно
+            убрать у глагола в инфинитиве частицу <b><i>-to</i></b> и
+            поставить глагол после подлежащего. Это и есть основное правило Present Simple.<br>
+            <b><i>I / We / You / They + V</i></b><br>
+            <b><i>She / He / It + V + s (es)</i></b>
+            <hr>
+        </div><br>
+        <h5 th:case="null">Нет записанных фраз!</h5>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Русский</th>
+                    <th></th>
+                    <th>English</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phrase : ${phrases}">
+                    <div th:if="${user == phrase.getUser}">
+                        <td th:field="${phrase.id}" type="hidden"></td>
+                        <td th:text="${phrase.rusPhrase}"></td>
+                        <td><span> - </span></td>
+                        <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
+                        <td><a th:href="@{affirmativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-success">Edit</a></td>
+                        <td></td>
+                        <td><a th:href="@{delete_phrase/affirmativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-success">Delete</a></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/presentSimple/affirmativeCreate" class="w-10 btn btn-outline-success">Добавить фразу</a></p>
+    </div>
+</main>
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

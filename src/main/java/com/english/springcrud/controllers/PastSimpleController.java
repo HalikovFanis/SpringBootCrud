@@ -14,12 +14,11 @@ import java.util.List;
 
 
 @Controller
-
-public class SimpleController {
+public class PastSimpleController {
 
     private final PhraseService phraseService;
     @Autowired
-    public SimpleController(PhraseService phraseService) {
+    public PastSimpleController(PhraseService phraseService) {
         this.phraseService = phraseService;
     }
 
@@ -31,7 +30,7 @@ public class SimpleController {
 
     @GetMapping("/pastSimple/affirmative")
     public String pastSimpleAffirmative(Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate");
+        List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "pastSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/affirmative";
@@ -39,7 +38,7 @@ public class SimpleController {
 
     @GetMapping("/pastSimple/questions")
     public String pastSimpleQuestions(Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("questionsCreate");
+        List<Phrase> phrases = phraseService.findAllByForm("questionsCreate", "pastSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/questions";
@@ -47,7 +46,7 @@ public class SimpleController {
 
     @GetMapping("/pastSimple/negative")
     public String pastSimpleNegative(Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("negativeCreate");
+        List<Phrase> phrases = phraseService.findAllByForm("negativeCreate", "pastSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "pastSimple/negative";

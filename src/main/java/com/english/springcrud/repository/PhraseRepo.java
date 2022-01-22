@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PhraseRepo extends JpaRepository<Phrase, Long> {
-    List<Phrase> findAllByForm(String form);
+    List<Phrase> findAllByFormAndTense(String form, String tense);
 }
