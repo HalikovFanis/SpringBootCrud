@@ -19,27 +19,27 @@ public class FutureSimpleController {
         this.phraseService = phraseService;
     }
 
-    @GetMapping("/futureSimple/affirmative")
+    @GetMapping("/simple/futureSimple/affirmative")
     public String futureSimpleAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "futureSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        return "futureSimple/affirmative";
+        return "/simple/futureSimple/affirmative";
     }
 
-    @GetMapping("/futureSimple/questions")
+    @GetMapping("/simple/futureSimple/questions")
     public String futureSimpleQuestions(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("questionsCreate", "futureSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        return "futureSimple/questions";
+        return "/simple/futureSimple/questions";
     }
 
-    @GetMapping("/futureSimple/negative")
+    @GetMapping("/simple/futureSimple/negative")
     public String futureSimpleNegative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("negativeCreate", "futureSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        return "futureSimple/negative";
+        return "/simple/futureSimple/negative";
     }
 }

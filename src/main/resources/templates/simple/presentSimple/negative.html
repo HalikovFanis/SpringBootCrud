@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Past Simple</title>
+    <title>Present Simple</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,14 +12,16 @@
 <header class="container" th:insert="blocks/header :: header"></header>
 
 <main>
-    <header class="container" th:insert="blocks/simple :: pastSimple"></header>
+    <header class="container" th:insert="blocks/simple :: presentSimple"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div><span class="btn-outline-info">*</span> Вопросительные предложения. В вопросительном предложении перед подлежащим нужно использовать
-            вспомогательный глагол <b><i>do</i></b> в прошедшем времени <b><i>did</i></b>, а после подлежащего поставить основной,
-            значимый глагол в начальной форме
+        <div><span class="btn-outline-success">*</span> Отрицательные предложения.
+            Чтобы составить отрицательное предложение —
+            нужно поставить вспомогательный глагол между подлежащим и глаголом.<br>
+            <b><i>I / We / You / They + do not (don’t) + V</i></b><br>
+            <b><i>She / He / It + does not (doesn’t) + V</i></b>
             <hr>
         </div><br>
-        <h5 th:case="null">Нет записанных фраз!</h5>
+        <h4 th:case="null">Нет записанных фраз!</h4>
         <div th:case="*">
             <table>
                 <thead>
@@ -34,18 +36,18 @@
                 <tr th:each="phrase : ${phrases}">
                     <div th:if="${user == phrase.getUser}">
                         <td th:field="${phrase.id}" type="hidden"></td>
-                        <td th:text="${phrase.rusPhrase}" ></td>
+                        <td th:text="${phrase.rusPhrase}"></td>
                         <td><span> - </span></td>
                         <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
-                        <td><a th:href="@{questionsCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
+                        <td><a th:href="@{negativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-success">Edit</a></td>
                         <td></td>
-                        <td><a th:href="@{delete_phrase/questionsCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
+                        <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-success">Delete</a></td>
                     </div>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/pastSimple/questionsCreate" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
+        <p><a th:href="@{/simple/presentSimple/negativeCreate}" class="w-10 btn btn-outline-success">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

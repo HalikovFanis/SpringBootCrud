@@ -15,15 +15,15 @@
 <main>
     <div class="container mt-5">
         <div class="btn-group-vertical">
-            <form method="get" class="btn-group" action="/futureSimple/affirmative">
+            <form method="get" class="btn-group" th:action="@{/simple/futureSimple/affirmative}">
                 <button type="submit" class="btn btn-lg btn-outline-warning">Утвердительная форма предложения</button>
             </form>
 
-            <form method="get" class="btn-group" action="/futureSimple/questions">
+            <form method="get" class="btn-group" th:action="@{/simple/futureSimple/questions}">
                 <button type="submit" class="btn btn-lg btn-outline-warning">Вопросительная форма предложения</button>
             </form>
 
-            <form method="get" class="btn-group" action="/futureSimple/negative">
+            <form method="get" class="btn-group" th:action="@{/simple/futureSimple/negative}">
                 <button type="submit" class="btn btn-lg btn-outline-warning">Отрицательная форма предложения</button>
             </form>
         </div>

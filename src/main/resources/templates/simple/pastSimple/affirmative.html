@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Future Simple</title>
+    <title>Past Simple</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,15 +12,10 @@
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
 <main>
-    <header class="container" th:insert="blocks/simple :: futureSimple"></header>
+    <header class="container" th:insert="blocks/simple :: pastSimple"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div><span class="btn-outline-warning">*</span> Утвердительные предложения.
-            Для того, чтобы составить утвердительное предложение в Future Simple —
-            нужно добавить глагол <b><i>will (shall)</i></b> после подлежащего,
-            но перед смысловым глаголом без частицы <b><i>to.</i></b><br>
-            <b><i>I / She / He / It / We / You / They + will (shall) + V</i></b><br>
-            Сокращение: <br>
-            <b><i>Will / Shall = ‘ll</i></b>
+        <div><span class="btn-outline-info">*</span> Утвердительные предложения. Образуется форма прошедшего времени с помощью добавления окончания <b><i>–ed</i></b>
+            к правильному глаголу или второй формы из таблицы для неправильных глаголов.
             <hr>
         </div><br>
         <h5 th:case="null">Нет записанных фраз!</h5>
@@ -41,15 +36,15 @@
                         <td th:text="${phrase.rusPhrase}"></td>
                         <td><span> - </span></td>
                         <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
-                        <td><a th:href="@{affirmativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-warning">Edit</a></td>
+                        <td><a th:href="@{affirmativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-info">Edit</a></td>
                         <td></td>
-                        <td><a th:href="@{delete_phrase/affirmativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-warning">Delete</a></td>
+                        <td><a th:href="@{delete_phrase/affirmativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-info">Delete</a></td>
                     </div>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/futureSimple/affirmativeCreate" class="w-10 btn btn-outline-warning">Добавить фразу</a></p>
+        <p><a th:href="@{/simple/pastSimple/affirmativeCreate}" class="w-10 btn btn-outline-info">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

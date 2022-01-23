@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Present Simple</title>
+    <title>Present Continuous</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,13 +12,16 @@
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
 <main>
-    <header class="container" th:insert="blocks/simple :: presentSimple"></header>
+    <header class="container" th:insert="blocks/continuous :: presentContinuous"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div><span class="btn-outline-success">*</span> Утвердительные предложения. Для построения нужно
-            убрать у глагола в инфинитиве частицу <b><i>-to</i></b> и
-            поставить глагол после подлежащего. Это и есть основное правило Present Simple.<br>
-            <b><i>I / We / You / They + V</i></b><br>
-            <b><i>She / He / It + V + s (es)</i></b>
+        <div><span class="btn-outline-success">*</span> В утвердительных предложениях подлежащее занимает первое место,
+            сказуемое — второе. В Present Continuous сказуемое составляют вспомогательный глагол
+            <b><i>to be</i></b> и основной (смысловой) глагол, который выражает действие.
+                <b><i>To be</i></b> принимает нужную форму <b><i>(am, is, are)</i></b> в зависимости от подлежащего,
+            а основной глагол приобретает окончание <b><i>-ing.</i></b><br>
+            <b><i>I am + глагол-ing : I am singing</i></b><br>
+            <b><i>He/She/It is + глагол-ing : He is smiling</i></b><br>
+            <b><i>We/You/They are + глагол-ing : We are listening</i></b>
             <hr>
         </div><br>
         <h5 th:case="null">Нет записанных фраз!</h5>
@@ -47,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-        <p><a href="/presentSimple/affirmativeCreate" class="w-10 btn btn-outline-success">Добавить фразу</a></p>
+        <p><a th:href="@{/continuous/presentContinuous/affirmativeCreate}" class="w-10 btn btn-outline-success">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

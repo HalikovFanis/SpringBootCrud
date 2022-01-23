@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Future Simple</title>
+    <title>Present Continuous</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,15 +12,14 @@
 <header class="container" th:insert="blocks/header :: header"></header>
 
 <main>
-    <header class="container" th:insert="blocks/simple :: futureSimple"></header>
+    <header class="container" th:insert="blocks/continuous :: presentContinuous"></header>
     <div class="container mt-5" th:switch="${phrases}">
-        <div><span class="btn-outline-warning">*</span> Отрицательные предложения.
-            Отрицательная конструкция времени Future Simple образуется при помощи
-            добавления частицы <b><i>not</i></b> после вспомогательного
-            глагола <b><i>will (shall).</i></b><br>
-            <b><i>I / She / He / It / We / You / They + will not (shall not) + V</i></b><br>
-            Сокращение:<br>
-            <b><i>Will not = won’t</i></b>
+        <div><span class="btn-outline-success">*</span> Когда Present Continuous употребляется
+            в отрицательных предложениях, вспомогательный и основной глагол разделяются частицей
+            <b><i>not.</i></b><br>
+            <b><i>I am not + глагол-ing : I am not singing</i></b><br>
+            <b><i>He/She/It is not + глагол-ing : He is not smiling</i></b><br>
+            <b><i>We/You/They are not + глагол-ing : We are not listening</i></b><br>
             <hr>
         </div><br>
         <h4 th:case="null">Нет записанных фраз!</h4>
@@ -41,15 +40,15 @@
                         <td th:text="${phrase.rusPhrase}"></td>
                         <td><span> - </span></td>
                         <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
-                        <td><a th:href="@{negativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-warning">Edit</a></td>
+                        <td><a th:href="@{negativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу" class="w-100 btn btn-outline-success">Edit</a></td>
                         <td></td>
-                        <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-warning">Delete</a></td>
+                        <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу" class="w-100 btn btn-outline-success">Delete</a></td>
                     </div>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/futureSimple/negativeCreate" class="w-10 btn btn-outline-warning">Добавить фразу</a></p>
+        <p><a th:href="@{/continuous/presentContinuous/negativeCreate}" class="w-10 btn btn-outline-success">Добавить фразу</a></p>
     </div>
 </main>
 <div class="container mt-5" th:insert="blocks/footer :: footer"></div>

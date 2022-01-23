@@ -27,7 +27,7 @@
     <div class="container mt-2"><label> Номер телефона : <input type="text" name="phoneNumber"/> </label></div>
     <div class="container mt-2"><label> Пароль : <input type="password" name="password"/> </label></div>
     <div class="container mt-2"><input type="submit" class="w-10 btn btn-outline-info" value="Зарегистрироваться"/></div>
-    <div class="container mt-2"><a href="/login" class="btn-outline-info">Вход</a></div>
+    <div class="container mt-2"><a th:href="@{/login}" class="btn-outline-info">Вход</a></div>
 </form>
 <div class="container" th:insert="blocks/footer :: footer"></div>
 </body>

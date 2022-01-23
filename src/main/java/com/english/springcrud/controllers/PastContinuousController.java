@@ -22,7 +22,7 @@ public class PastContinuousController {
     }
 
     @GetMapping("/continuous/pastContinuous/pastContinuous")
-    public String pastSimple(Model model, Principal principal) {
+    public String pastContinuous(Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/continuous/pastContinuous/pastContinuous";
     }
@@ -59,13 +59,13 @@ public class PastContinuousController {
         model.addAttribute("engPhrase", phrase_eng);
         switch (form) {
             case "affirmativeCreate":
-                return "continuous/pastContinuous/affirmativeCreate";
+                return "/affirmativeCreate";
             case "questionsCreate":
-                return "continuous/pastContinuous/questionsCreate";
+                return "/questionsCreate";
             case "negativeCreate":
-                return "continuous/pastContinuous/negativeCreate";
+                return "/negativeCreate";
         }
-        return "continuous/" + tense + "/" + tense;
+        return "/continuous/" + tense + "/" + tense;
     }
 
     @PostMapping("/continuous/{tense}/{form}")
@@ -76,7 +76,7 @@ public class PastContinuousController {
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return "/continuous/" + tense + "/" + form;}
+            return "/edit_phrase";}
 
         phraseService.savePhrase(principal, phrase);
         switch (form) {
@@ -114,7 +114,7 @@ public class PastContinuousController {
         Phrase phrase = phraseService.findById(id);
         model.addAttribute("phrase", phrase);
         phrase.setTense(tense);
-        return "pastSimple/edit_phrase";
+        return "/edit_phrase";
     }
 
     @PostMapping("/continuous/{tense}/{form}/edit_phrase")
@@ -125,7 +125,7 @@ public class PastContinuousController {
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return tense + "/edit_phrase";}
+            return "/edit_phrase";}
         phraseService.savePhrase(principal, phrase);
         switch (form) {
             case "affirmativeCreate":

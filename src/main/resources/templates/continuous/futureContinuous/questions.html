@@ -1,0 +1,66 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Future Continuous</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+
+<main>
+    <header class="container" th:insert="blocks/continuous :: futureContinuous"></header>
+    <div class="container mt-5" th:switch="${phrases}">
+        <div><span class="btn-outline-warning">*</span> Вопросительные предложения.
+            При образовании вопросительного предложения во времени Future Continuous
+            вспомогательный глагол <b><i>will (shall)</i></b> выносится в начало предложения перед подлежащим.<br>
+            <b><i>Will (Shall) + I / He / She / It / You / We / They + be Ving : Will we be walking?</i></b><br>
+
+            Специальные уточняющие вопросы образуются во времени Future Continuous с помощью
+            <b><i>question words</i></b> (вопросительных слов). Например: <b><i>where(где), when(когда)</i></b> и
+            других.
+            <b><i>QW</i></b> ставится в начало предложения, а дальнейший порядок слов в конструкции остается таким же,
+            как и в вопросе.<br>
+            <b><i>QW + will (shall) + I / He / She / It / You / We / They + be Ving</i></b><br>
+            <b><i>What will you be playing on your guitar next Sunday evening?</i></b>
+            <hr>
+        </div>
+        <br>
+        <h5 th:case="null">Нет записанных фраз!</h5>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Русский</th>
+                    <th></th>
+                    <th>English</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phrase : ${phrases}">
+                    <div th:if="${user == phrase.getUser}">
+                        <td th:field="${phrase.id}" type="hidden"></td>
+                        <td th:text="${phrase.rusPhrase}"></td>
+                        <td><span> - </span></td>
+                        <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
+                        <td><a th:href="@{questionsCreate/{id}(id=${phrase.id})}" title="Изменить фразу"
+                               class="w-100 btn btn-outline-warning">Edit</a></td>
+                        <td></td>
+                        <td><a th:href="@{delete_phrase/questionsCreate/{id}(id=${phrase.id})}" title="Удалить фразу"
+                               class="w-100 btn btn-outline-warning">Delete</a></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a th:href="@{/continuous/futureContinuous/questionsCreate}" class="w-10 btn btn-outline-warning">Добавить
+            фразу</a></p>
+    </div>
+</main>
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
