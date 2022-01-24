@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Present Perfect Continuous</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+<div class="container" th:insert="blocks/perfectCont :: presentPerfectCont"></div>
+<main>
+    <div class="container mt-5">
+        <div class="btn-group-vertical">
+            <form method="get" class="btn-group" th:action="@{/perfectCont/presentPerfectCont/affirmative}">
+                <button type="submit" class="btn btn-lg btn-outline-success">Утвердительная форма предложения</button>
+            </form>
+
+            <form method="get" class="btn-group" th:action="@{/perfectCont/presentPerfectCont/questions}">
+                <button type="submit" class="btn btn-lg btn-outline-success">Вопросительная форма предложения</button>
+            </form>
+
+            <form method="get" class="btn-group" th:action="@{/perfectCont/presentPerfectCont/negative}">
+                <button type="submit" class="btn btn-lg btn-outline-success">Отрицательная форма предложения</button>
+            </form>
+        </div>
+    </div>
+</main>
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

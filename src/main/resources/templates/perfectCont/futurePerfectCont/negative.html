@@ -1,0 +1,57 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Future Perfect Continuous</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+<header class="container" th:insert="blocks/header :: header"></header>
+
+<main>
+    <header class="container" th:insert="blocks/perfectCont :: futurePerfectCont"></header>
+    <div class="container mt-5" th:switch="${phrases}">
+        <div><span class="btn-outline-warning">*</span> Отрицательная форма: Добавляем частицу <b><i>«not»</i></b> между
+            <b><i>will</i></b> и <b><i>have.</i></b><br>
+            <b><i>I/He/She/It/We/You/They + will not have been + V-ing : We will not have been playing</i></b><br>
+            <hr>
+        </div>
+        <br>
+        <h4 th:case="null">Нет записанных фраз!</h4>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Русский</th>
+                    <th></th>
+                    <th>English</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phrase : ${phrases}">
+                    <div th:if="${user == phrase.getUser}">
+                        <td th:field="${phrase.id}" type="hidden"></td>
+                        <td th:text="${phrase.rusPhrase}"></td>
+                        <td><span> - </span></td>
+                        <td th:text="${phrase.engPhrase}" class="fst-italic"></td>
+                        <td><a th:href="@{negativeCreate/{id}(id=${phrase.id})}" title="Изменить фразу"
+                               class="w-100 btn btn-outline-warning">Edit</a></td>
+                        <td></td>
+                        <td><a th:href="@{delete_phrase/negativeCreate/{id}(id=${phrase.id})}" title="Удалить фразу"
+                               class="w-100 btn btn-outline-warning">Delete</a></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a th:href="@{/perfectCont/futurePerfectCont/negativeCreate}" class="w-10 btn btn-outline-warning">Добавить фразу</a>
+        </p>
+    </div>
+</main>
+<div class="container mt-5" th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
