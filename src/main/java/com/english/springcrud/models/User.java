@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.awt.*;
@@ -32,6 +33,7 @@ public class User implements UserDetails {
 
     @Column(name = "email")
     @NotEmpty(message = "напишите email!")
+    @Email(message = "введите верно email!")
     private String email;
 
     @Column(name = "phone_number")

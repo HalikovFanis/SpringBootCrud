@@ -20,7 +20,7 @@
     Вы вышли из системы.
 </div>
 <form th:action="@{/login}" method="post">
-    <div class="container mt-2"><label> Имя пользователя(email) : <input type="email" name="username"/> </label></div>
+    <div class="container mt-2"><label> Введите email : <input type="email" name="username"/> </label></div>
     <div class="container mt-2"><label> Пароль : <input type="password" name="password"/> </label></div>
     <div class="container mt-2"><input type="submit" class="w-10 btn btn-outline-info" value="Вход"/></div>
     <div class="container mt-2"><a th:href="@{/registration}" class="btn-outline-info">Зарегистрироваться</a></div>

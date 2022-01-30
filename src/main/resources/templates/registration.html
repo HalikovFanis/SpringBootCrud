@@ -20,12 +20,23 @@
     <p class="btn-outline-info" Вы вышли из системы./>
 </div>
 
-<form th:action="@{/registration}" method="post">
+<form th:action="@{/registration}" th:object="${user}" method="post">
 <!--    <input type="hidden" name="id">-->
-    <div class="container mt-2"><label> Имя пользователя : <input type="text" name="name"/> </label></div>
-    <div class="container mt-2"><label> E-mail : <input type="email" name="email"/> </label></div>
-    <div class="container mt-2"><label> Номер телефона : <input type="text" name="phoneNumber"/> </label></div>
-    <div class="container mt-2"><label> Пароль : <input type="password" name="password"/> </label></div>
+    <div class="container mt-2">
+        <label> Имя пользователя : <input type="text" th:field="*{name}" id="name"/> </label></div>
+    <div class="container mt-2" style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+
+    <div class="container mt-2">
+        <label> E-mail : <input type="email" th:field="*{email}" id="email"/> </label></div>
+    <div class="container mt-2" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+
+    <div class="container mt-2">
+        <label> Номер телефона : <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/> </label></div>
+
+    <div class="container mt-2">
+        <label> Пароль : <input type="password" th:field="*{password}" id="password"/> </label></div>
+    <div class="container mt-2" style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</div>
+
     <div class="container mt-2"><input type="submit" class="w-10 btn btn-outline-info" value="Зарегистрироваться"/></div>
     <div class="container mt-2"><a th:href="@{/login}" class="btn-outline-info">Вход</a></div>
 </form>
