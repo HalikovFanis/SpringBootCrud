@@ -10,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,17 +29,24 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "email")
+    @NotEmpty(message = "напишите email!")
     private String email;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "name")
+    @NotEmpty(message = "напишите имя!")
     private String name;
+
     @Column(name = "active")
     private boolean active;
-    //    @Column(name = "avatar")
-//    private Image avatar;
+
     @Column(name = "password", length = 1000)
+    @NotEmpty(message = "напишите пароль!")
+    @Size(min = 8, message = "длина пароля должна быть не менее 8 символов!")
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
