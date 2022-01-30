@@ -29,17 +29,16 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/A0")
-    public String a0(Model model) {
-        List<Phrase> phrases = phraseService.findAll();
-        model.addAttribute("phrases", phrases);
-        return "A0";
+    @GetMapping("/about")
+    public String about(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "about";
     }
 
-    @GetMapping("/delete_phrase/{id}")
-    public String deletePhrase(@PathVariable("id") Long id) {
-        phraseService.deleteById(id);
-        return "redirect:/A0";
+    @GetMapping("/map")
+    public String map(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "map";
     }
 
 }
