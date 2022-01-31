@@ -17,6 +17,12 @@ public class PresentContinuousController {
         this.phraseService = phraseService;
     }
 
+    @GetMapping("/continuous/presentContinuous/presentContinuous")
+    public String presentContinuous(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "/continuous/presentContinuous/presentContinuous";
+    }
+
     @GetMapping("/continuous/presentContinuous/affirmative")
     public String presentContinuousAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "presentContinuous");

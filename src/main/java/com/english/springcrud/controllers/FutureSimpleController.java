@@ -19,6 +19,12 @@ public class FutureSimpleController {
         this.phraseService = phraseService;
     }
 
+    @GetMapping("/simple/futureSimple/futureSimple")
+    public String futureSimple(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "/simple/futureSimple/futureSimple";
+    }
+
     @GetMapping("/simple/futureSimple/affirmative")
     public String futureSimpleAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "futureSimple");

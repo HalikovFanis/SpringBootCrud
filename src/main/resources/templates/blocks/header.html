@@ -16,6 +16,11 @@
                         </li>
                     </ul>
                 </div>
+                <div th:if="${user.email}">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="w-10 btn btn-outline-info" type="submit" value="Выйти">
+                    </form>
+                </div>
             </div>
         </nav>
     </div>

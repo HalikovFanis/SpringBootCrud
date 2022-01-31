@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>English</title>
@@ -21,7 +20,6 @@
 </div>
 
 <form th:action="@{/registration}" th:object="${user}" method="post">
-<!--    <input type="hidden" name="id">-->
     <div class="container mt-2">
         <label> Имя пользователя : <input type="text" th:field="*{name}" id="name"/> </label></div>
     <div class="container mt-2" style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>

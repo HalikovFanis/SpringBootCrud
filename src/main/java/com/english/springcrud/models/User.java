@@ -1,6 +1,5 @@
 package com.english.springcrud.models;
 
-
 import com.english.springcrud.models.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -17,7 +17,6 @@ import java.util.List;
 public class PhraseService {
 
     private final PhraseRepo phraseRepo;
-
     private final UserRepo userRepo;
 
     @Autowired
@@ -37,7 +36,8 @@ public class PhraseService {
 
     public Phrase savePhrase(Principal principal, Phrase phrase) {
         phrase.setUser(getUserByPrincipal(principal));
-        log.info("Save new {}", phrase.getRusPhrase()+ " - " + phrase.getEngPhrase());
+        log.info("Save new: {}; Author email: {}", phrase.getRusPhrase()+ " - " + phrase.getEngPhrase(),
+                phrase.getUser().getEmail());
         return phraseRepo.save(phrase);
     }
 

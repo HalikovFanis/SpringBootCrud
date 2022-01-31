@@ -17,6 +17,12 @@ public class FuturePerfectContController {
         this.phraseService = phraseService;
     }
 
+    @GetMapping("/perfectCont/futurePerfectCont/futurePerfectCont")
+    public String futurePerfectCont(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "/perfectCont/futurePerfectCont/futurePerfectCont";
+    }
+
     @GetMapping("/perfectCont/futurePerfectCont/affirmative")
     public String futurePerfectContAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "futurePerfectCont");

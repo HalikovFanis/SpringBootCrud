@@ -19,6 +19,12 @@ public class PresentSimpleController {
         this.phraseService = phraseService;
     }
 
+    @GetMapping("/simple/presentSimple/presentSimple")
+    public String presentSimple(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "/simple/presentSimple/presentSimple";
+    }
+
     @GetMapping("/simple/presentSimple/affirmative")
     public String presentSimpleAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "presentSimple");
@@ -40,6 +46,6 @@ public class PresentSimpleController {
         List<Phrase> phrases = phraseService.findAllByForm("negativeCreate", "presentSimple");
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        return "/simple/ presentSimple/negative";
+        return "/simple/presentSimple/negative";
     }
 }

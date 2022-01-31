@@ -17,6 +17,12 @@ public class FutureContinuousController {
         this.phraseService = phraseService;
     }
 
+    @GetMapping("/continuous/futureContinuous/futureContinuous")
+    public String futureContinuous(Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
+        return "/continuous/futureContinuous/futureContinuous";
+    }
+
     @GetMapping("/continuous/futureContinuous/affirmative")
     public String futureContinuousAffirmative(Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", "futureContinuous");
