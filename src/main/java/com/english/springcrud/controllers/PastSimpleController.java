@@ -73,7 +73,9 @@ public class PastSimpleController {
     @PostMapping("/simple/{tense}/{form}")
     public String createPhraseSimple(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                               @Valid Phrase phrase, BindingResult bindingResult,
+                                     Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
@@ -123,10 +125,11 @@ public class PastSimpleController {
     @PostMapping("/simple/{tense}/{form}/edit_phrase")
     public String updatePhrase(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                               @Valid Phrase phrase, BindingResult bindingResult,
+                               Model model, Principal principal) {
         phrase.setTense(tense);
         phrase.setForm(form);
-
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         if (bindingResult.hasErrors()) {
             return "/edit_phrase";}
         phraseService.savePhrase(principal, phrase);

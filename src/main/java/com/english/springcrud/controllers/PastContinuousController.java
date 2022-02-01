@@ -72,7 +72,9 @@ public class PastContinuousController {
     @PostMapping("/continuous/{tense}/{form}")
     public String createPhraseContinues(@PathVariable(value = "tense") String tense,
                                         @PathVariable(value = "form") String form,
-                                        @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                                        @Valid Phrase phrase, BindingResult bindingResult,
+                                        Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
@@ -122,7 +124,9 @@ public class PastContinuousController {
     @PostMapping("/continuous/{tense}/{form}/edit_phrase")
     public String updatePhraseContinuous(@PathVariable(value = "tense") String tense,
                                @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                               @Valid Phrase phrase, BindingResult bindingResult,
+                                         Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 

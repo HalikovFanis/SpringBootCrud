@@ -72,7 +72,9 @@ public class PastPerfectContController {
     @PostMapping("/perfectCont/{tense}/{form}")
     public String createPhrasePerfectCont(@PathVariable(value = "tense") String tense,
                                       @PathVariable(value = "form") String form,
-                                      @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                                      @Valid Phrase phrase, BindingResult bindingResult,
+                                          Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
@@ -123,7 +125,9 @@ public class PastPerfectContController {
     @PostMapping("/perfectCont/{tense}/{form}/edit_phrase")
     public String updatePhrasePerfectCont(@PathVariable(value = "tense") String tense,
                                       @PathVariable(value = "form") String form,
-                                      @Valid Phrase phrase, BindingResult bindingResult, Principal principal) {
+                                      @Valid Phrase phrase, BindingResult bindingResult,
+                                          Model model, Principal principal) {
+        model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
