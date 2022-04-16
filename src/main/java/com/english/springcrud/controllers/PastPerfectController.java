@@ -79,7 +79,14 @@ public class PastPerfectController {
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return "/edit_phrase";
+            switch (form) {
+                case "affirmativeCreate":
+                    return "/affirmativeCreate";
+                case "questionsCreate":
+                    return "/questionsCreate";
+                case "negativeCreate":
+                    return "/negativeCreate";
+            }
         }
 
         phraseService.savePhrase(principal, phrase);
@@ -132,14 +139,7 @@ public class PastPerfectController {
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            switch (form) {
-                case "affirmativeCreate":
-                    return "/affirmativeCreate";
-                case "questionsCreate":
-                    return "/questionsCreate";
-                case "negativeCreate":
-                    return "/negativeCreate";
-            }
+            return "/edit_phrase";
         }
         phraseService.savePhrase(principal, phrase);
         switch (form) {
