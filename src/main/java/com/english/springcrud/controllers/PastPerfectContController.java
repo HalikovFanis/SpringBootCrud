@@ -53,8 +53,8 @@ public class PastPerfectContController {
 
     @GetMapping("/perfectCont/{tense}/{form}")
     public String createPhraseFormPerfectCont(@PathVariable(value = "tense") String tense,
-                                          @PathVariable(value = "form") String form,
-                                          Phrase phrase_rus, Phrase phrase_eng, Model model, Principal principal) {
+                                              @PathVariable(value = "form") String form,
+                                              Phrase phrase_rus, Phrase phrase_eng, Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
@@ -71,15 +71,22 @@ public class PastPerfectContController {
 
     @PostMapping("/perfectCont/{tense}/{form}")
     public String createPhrasePerfectCont(@PathVariable(value = "tense") String tense,
-                                      @PathVariable(value = "form") String form,
-                                      @Valid Phrase phrase, BindingResult bindingResult,
+                                          @PathVariable(value = "form") String form,
+                                          @Valid Phrase phrase, BindingResult bindingResult,
                                           Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return "/edit_phrase";
+            switch (form) {
+                case "affirmativeCreate":
+                    return "/affirmativeCreate";
+                case "questionsCreate":
+                    return "/questionsCreate";
+                case "negativeCreate":
+                    return "/negativeCreate";
+            }
         }
 
         phraseService.savePhrase(principal, phrase);
@@ -96,8 +103,8 @@ public class PastPerfectContController {
 
     @GetMapping("/perfectCont/{tense}/delete_phrase/{form}/{id}")
     public String deletePhrasePerfectCont(@PathVariable(value = "id") Long id,
-                                      @PathVariable(value = "tense") String tense,
-                                      @PathVariable(value = "form") String form) {
+                                          @PathVariable(value = "tense") String tense,
+                                          @PathVariable(value = "form") String form) {
         phraseService.deleteById(id);
         switch (form) {
             case "affirmativeCreate":
@@ -112,9 +119,9 @@ public class PastPerfectContController {
 
     @GetMapping("/perfectCont/{tense}/{form}/{id}")
     public String updatePhraseFormPerfectCont(@PathVariable("id") Long id,
-                                          @PathVariable(value = "tense") String tense,
-                                          @PathVariable(value = "form") String form,
-                                          Model model, Principal principal) {
+                                              @PathVariable(value = "tense") String tense,
+                                              @PathVariable(value = "form") String form,
+                                              Model model, Principal principal) {
         Phrase phrase = phraseService.findById(id);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         model.addAttribute("phrase", phrase);
@@ -124,8 +131,8 @@ public class PastPerfectContController {
 
     @PostMapping("/perfectCont/{tense}/{form}/edit_phrase")
     public String updatePhrasePerfectCont(@PathVariable(value = "tense") String tense,
-                                      @PathVariable(value = "form") String form,
-                                      @Valid Phrase phrase, BindingResult bindingResult,
+                                          @PathVariable(value = "form") String form,
+                                          @Valid Phrase phrase, BindingResult bindingResult,
                                           Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);

@@ -17,6 +17,7 @@ import java.util.List;
 public class PastContinuousController {
 
     private final PhraseService phraseService;
+
     public PastContinuousController(PhraseService phraseService) {
         this.phraseService = phraseService;
     }
@@ -54,7 +55,7 @@ public class PastContinuousController {
     @GetMapping("/continuous/{tense}/{form}")
     public String createPhraseFormContinuous(@PathVariable(value = "tense") String tense,
                                              @PathVariable(value = "form") String form,
-                                   Phrase phrase_rus, Phrase phrase_eng, Model model, Principal principal) {
+                                             Phrase phrase_rus, Phrase phrase_eng, Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
@@ -79,7 +80,15 @@ public class PastContinuousController {
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return "/edit_phrase";}
+            switch (form) {
+                case "affirmativeCreate":
+                    return "/affirmativeCreate";
+                case "questionsCreate":
+                    return "/questionsCreate";
+                case "negativeCreate":
+                    return "/negativeCreate";
+            }
+        }
 
         phraseService.savePhrase(principal, phrase);
         switch (form) {
@@ -95,8 +104,8 @@ public class PastContinuousController {
 
     @GetMapping("/continuous/{tense}/delete_phrase/{form}/{id}")
     public String deletePhraseContinuous(@PathVariable(value = "id") Long id,
-                               @PathVariable(value = "tense") String tense,
-                               @PathVariable(value = "form") String form) {
+                                         @PathVariable(value = "tense") String tense,
+                                         @PathVariable(value = "form") String form) {
         phraseService.deleteById(id);
         switch (form) {
             case "affirmativeCreate":
@@ -111,9 +120,9 @@ public class PastContinuousController {
 
     @GetMapping("/continuous/{tense}/{form}/{id}")
     public String updatePhraseFormContinuous(@PathVariable("id") Long id,
-                                   @PathVariable(value = "tense") String tense,
-                                   @PathVariable(value = "form") String form,
-                                   Model model, Principal principal) {
+                                             @PathVariable(value = "tense") String tense,
+                                             @PathVariable(value = "form") String form,
+                                             Model model, Principal principal) {
         Phrase phrase = phraseService.findById(id);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         model.addAttribute("phrase", phrase);
@@ -123,15 +132,16 @@ public class PastContinuousController {
 
     @PostMapping("/continuous/{tense}/{form}/edit_phrase")
     public String updatePhraseContinuous(@PathVariable(value = "tense") String tense,
-                               @PathVariable(value = "form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult,
+                                         @PathVariable(value = "form") String form,
+                                         @Valid Phrase phrase, BindingResult bindingResult,
                                          Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
 
         if (bindingResult.hasErrors()) {
-            return "/edit_phrase";}
+            return "/edit_phrase";
+        }
         phraseService.savePhrase(principal, phrase);
         switch (form) {
             case "affirmativeCreate":

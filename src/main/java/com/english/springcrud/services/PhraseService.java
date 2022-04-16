@@ -36,7 +36,7 @@ public class PhraseService {
 
     public Phrase savePhrase(Principal principal, Phrase phrase) {
         phrase.setUser(getUserByPrincipal(principal));
-        log.info("Save new: {}; Author email: {}", phrase.getRusPhrase()+ " - " + phrase.getEngPhrase(),
+        log.info("Save new: {}; Author email: {}", phrase.getRusPhrase() + " - " + phrase.getEngPhrase(),
                 phrase.getUser().getEmail());
         return phraseRepo.save(phrase);
     }

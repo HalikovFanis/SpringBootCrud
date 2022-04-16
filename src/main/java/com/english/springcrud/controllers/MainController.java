@@ -18,6 +18,7 @@ import java.util.List;
 public class MainController {
 
     private final PhraseService phraseService;
+
     @Autowired
     public MainController(PhraseService phraseService) {
         this.phraseService = phraseService;

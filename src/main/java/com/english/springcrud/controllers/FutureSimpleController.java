@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 public class FutureSimpleController {
     private final PhraseService phraseService;
+
     @Autowired
     public FutureSimpleController(PhraseService phraseService) {
         this.phraseService = phraseService;
