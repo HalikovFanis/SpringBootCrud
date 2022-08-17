@@ -37,6 +37,6 @@ public class Phrase {
     private String form;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

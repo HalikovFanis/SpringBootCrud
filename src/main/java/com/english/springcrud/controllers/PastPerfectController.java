@@ -77,7 +77,7 @@ public class PastPerfectController {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
         phrase.setForm(form);
-
+ 
         if (bindingResult.hasErrors()) {
             switch (form) {
                 case "affirmativeCreate":
