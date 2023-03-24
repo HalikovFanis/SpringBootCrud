@@ -1,6 +1,5 @@
 package com.english.springcrud.controllers;
 
-
 import com.english.springcrud.models.User;
 import com.english.springcrud.services.UserService;
 import lombok.RequiredArgsConstructor;

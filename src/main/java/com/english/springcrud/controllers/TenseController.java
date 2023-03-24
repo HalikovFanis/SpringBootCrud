@@ -24,16 +24,16 @@ public class TenseController {
     }
 
     @GetMapping("/{first}/{tense}/{tense}/")
-    public String tense(@PathVariable(value = "first") String first,
-                         @PathVariable(value = "tense") String tense,
+    public String tense(@PathVariable("first") String first,
+                         @PathVariable("tense") String tense,
                          Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/" + first + "/" + tense + "/" + tense;
     }
 
     @GetMapping("/{first}/{tense}/affirmative")
-    public String affirmative(@PathVariable(value = "first") String first,
-                              @PathVariable(value = "tense") String tense,
+    public String affirmative(@PathVariable("first") String first,
+                              @PathVariable("tense") String tense,
                               Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", tense);
         model.addAttribute("phrases", phrases);
@@ -42,8 +42,8 @@ public class TenseController {
     }
 
     @GetMapping("/{first}/{tense}/questions")
-    public String questions(@PathVariable(value = "first") String first,
-                            @PathVariable(value = "tense") String tense,
+    public String questions(@PathVariable("first") String first,
+                            @PathVariable("tense") String tense,
                             Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("questionsCreate", tense);
         model.addAttribute("phrases", phrases);
@@ -52,8 +52,8 @@ public class TenseController {
     }
 
     @GetMapping("/{first}/{tense}/negative")
-    public String negative(@PathVariable(value = "first") String first,
-                           @PathVariable(value = "tense") String tense,
+    public String negative(@PathVariable("first") String first,
+                           @PathVariable("tense") String tense,
                            Model model, Principal principal) {
         List<Phrase> phrases = phraseService.findAllByForm("negativeCreate", tense);
         model.addAttribute("phrases", phrases);
