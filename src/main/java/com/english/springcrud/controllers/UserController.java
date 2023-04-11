@@ -2,19 +2,20 @@ package com.english.springcrud.controllers;
 
 import com.english.springcrud.models.User;
 import com.english.springcrud.services.UserService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import lombok.RequiredArgsConstructor;
 import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-public class UserController {
+public class   UserController {
     private final UserService userService;
 
     @GetMapping("/login")
