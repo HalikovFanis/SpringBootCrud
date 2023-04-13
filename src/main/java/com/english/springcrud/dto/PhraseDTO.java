@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 public class PhraseDTO {
 
+    private Long id;
+
     @NotEmpty(message = "Напишите фразу")
     @Size(max = 200, message = "Слишком длинное предложение!")
     @Pattern(regexp = "^[А-Яа-я]+.{1,200}", message = "Фраза должна быть на русском языке!")

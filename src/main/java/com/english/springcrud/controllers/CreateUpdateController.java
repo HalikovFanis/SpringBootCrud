@@ -42,6 +42,10 @@ public class CreateUpdateController {
         return modelMapper.map(phraseDTO, Phrase.class);
     }
 
+    public PhraseDTO convertToPhraseDTO(Phrase phrase) {
+        return modelMapper.map(phrase, PhraseDTO.class);
+    }
+
     @GetMapping("/{first}/{tense}/{form}")
     public String createPhraseForm(@PathVariable("first") String first,
                                    @PathVariable("tense") String tense,
@@ -101,10 +105,10 @@ public class CreateUpdateController {
                                    @PathVariable("tense") String tense,
                                    @PathVariable("form") String form,
                                    Model model, Principal principal) {
-        Phrase phrase = phraseService.findById(id);
+        PhraseDTO phraseDTO = convertToPhraseDTO(phraseService.findById(id));
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        model.addAttribute("phrase", phrase);
-        phrase.setTense(tense);
+        model.addAttribute("phraseDTO", phraseDTO);
+        phraseDTO.setTense(tense);
         return "/edit_phrase";
     }
 
@@ -112,18 +116,18 @@ public class CreateUpdateController {
     public String updatePhrase(@PathVariable("first") String first,
                                @PathVariable("tense") String tense,
                                @PathVariable("form") String form,
-                               @Valid Phrase phrase,
+                               @Valid PhraseDTO phraseDTO,
                                BindingResult bindingResult,
                                Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        phrase.setTense(tense);
-        phrase.setForm(form);
+        phraseDTO.setTense(tense);
+        phraseDTO.setForm(form);
 
         if (bindingResult.hasErrors()) {
             return "/edit_phrase";
         }
 
-        phraseService.savePhrase(principal, phrase);
+        phraseService.savePhrase(principal, convertToPhrase(phraseDTO));
         return selectForm(form, "/" + first + "/" + tense + "/" + form);
     }
 }

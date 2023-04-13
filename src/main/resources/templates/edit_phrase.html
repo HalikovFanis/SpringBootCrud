@@ -11,7 +11,7 @@
 </head>
 <body>
 <header class="container" th:insert="blocks/header :: header"></header>
-    <form class="container mt-5" th:action="@{edit_phrase}" th:object="${phrase}" th:method="patch">
+    <form class="container mt-5" th:action="@{edit_phrase}" th:object="${phraseDTO}" th:method="patch">
         <input readonly type hidden="number" th:field ="*{id}" id="id" placeholder="ID" class="form-control">
         <br/>
         <label for="rusPhrase">Русский</label>
