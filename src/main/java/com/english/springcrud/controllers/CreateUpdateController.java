@@ -1,8 +1,10 @@
 package com.english.springcrud.controllers;
 
 
+import com.english.springcrud.dto.PhraseDTO;
 import com.english.springcrud.models.Phrase;
 import com.english.springcrud.services.PhraseService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,12 @@ import java.security.Principal;
 public class CreateUpdateController {
 
     private final PhraseService phraseService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CreateUpdateController(PhraseService phraseService) {
+    public CreateUpdateController(PhraseService phraseService, ModelMapper modelMapper) {
         this.phraseService = phraseService;
+        this.modelMapper = modelMapper;
     }
 
     public String selectForm(String form, String result) {
@@ -34,11 +38,16 @@ public class CreateUpdateController {
         return result;
     }
 
+    public Phrase convertToPhrase(PhraseDTO phraseDTO) {
+        return modelMapper.map(phraseDTO, Phrase.class);
+    }
+
     @GetMapping("/{first}/{tense}/{form}")
     public String createPhraseForm(@PathVariable("first") String first,
                                    @PathVariable("tense") String tense,
                                    @PathVariable("form") String form,
-                                   Phrase phrase_rus, Phrase phrase_eng, Model model, Principal principal) {
+                                   PhraseDTO phrase_rus, PhraseDTO phrase_eng,
+                                   Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         model.addAttribute("rusPhrase", phrase_rus);
         model.addAttribute("engPhrase", phrase_eng);
@@ -56,12 +65,12 @@ public class CreateUpdateController {
     public String createPhrase(@PathVariable("first") String first,
                                @PathVariable("tense") String tense,
                                @PathVariable("form") String form,
-                               @Valid Phrase phrase,
+                               @Valid PhraseDTO phraseDTO,
                                BindingResult bindingResult,
                                Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
-        phrase.setTense(tense);
-        phrase.setForm(form);
+        phraseDTO.setTense(tense);
+        phraseDTO.setForm(form);
 
         if (bindingResult.hasErrors()) {
             if (form.equals("affirmativeCreate") ||
@@ -71,7 +80,7 @@ public class CreateUpdateController {
             }
         }
 
-        phraseService.savePhrase(principal, phrase);
+        phraseService.savePhrase(principal, convertToPhrase(phraseDTO));
 
         return selectForm(form, "redirect:/" + first + "/" + tense + "/" + tense);
     }
@@ -103,7 +112,8 @@ public class CreateUpdateController {
     public String updatePhrase(@PathVariable("first") String first,
                                @PathVariable("tense") String tense,
                                @PathVariable("form") String form,
-                               @Valid Phrase phrase, BindingResult bindingResult,
+                               @Valid Phrase phrase,
+                               BindingResult bindingResult,
                                Model model, Principal principal) {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         phrase.setTense(tense);
@@ -112,8 +122,8 @@ public class CreateUpdateController {
         if (bindingResult.hasErrors()) {
             return "/edit_phrase";
         }
-        phraseService.savePhrase(principal, phrase);
 
+        phraseService.savePhrase(principal, phrase);
         return selectForm(form, "/" + first + "/" + tense + "/" + form);
     }
 }
