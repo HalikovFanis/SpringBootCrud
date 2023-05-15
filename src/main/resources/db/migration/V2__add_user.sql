@@ -1,0 +1,2 @@
+insert into users (id, active, date_of_create, email, name, password, phone_number)
+values ('1', 'true', '2022-01-30 19:50:48.347455', 'halfaroppo@gmail.com', 'halfar', '$2a$08$7qe/kM5VzbRzbNzIq1X76ueMJoqnrdd0KEdXz1BOgF.nbZ/Eqzn5.', '777888111');
