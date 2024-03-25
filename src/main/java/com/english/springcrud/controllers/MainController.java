@@ -41,5 +41,4 @@ public class MainController {
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "map";
     }
-
 }

@@ -4,7 +4,6 @@ import com.english.springcrud.models.Phrase;
 import com.english.springcrud.models.User;
 import com.english.springcrud.repository.PhraseRepo;
 import com.english.springcrud.repository.UserRepo;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +25,7 @@ public class PhraseService {
     }
 
     public Phrase findById(Long id) {
-//        return phraseRepo.getOne(id);
         return phraseRepo.findById(id).orElse(null);
-    }
-
-    public List<Phrase> findAll() {
-        return phraseRepo.findAll();
     }
 
     public Phrase savePhrase(Principal principal, Phrase phrase) {
@@ -52,7 +46,7 @@ public class PhraseService {
         phraseRepo.deleteById(id);
     }
 
-    public List<Phrase> findAllByForm(String form, String tense) {
+    public List<Phrase> findAllByFormAndTense(String form, String tense) {
         if (form != null && tense != null) {
             return phraseRepo.findAllByFormAndTense(form, tense);
         }

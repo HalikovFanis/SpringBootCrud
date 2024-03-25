@@ -5,10 +5,8 @@ import com.english.springcrud.services.PhraseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class TenseController {
     public String affirmative(@PathVariable("first") String first,
                               @PathVariable("tense") String tense,
                               Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("affirmativeCreate", tense);
+        List<Phrase> phrases = phraseService.findAllByFormAndTense("affirmativeCreate", tense);
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/" + first + "/" + tense + "/affirmative";
@@ -45,7 +43,7 @@ public class TenseController {
     public String questions(@PathVariable("first") String first,
                             @PathVariable("tense") String tense,
                             Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("questionsCreate", tense);
+        List<Phrase> phrases = phraseService.findAllByFormAndTense("questionsCreate", tense);
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/" + first + "/" + tense + "/questions";
@@ -55,7 +53,7 @@ public class TenseController {
     public String negative(@PathVariable("first") String first,
                            @PathVariable("tense") String tense,
                            Model model, Principal principal) {
-        List<Phrase> phrases = phraseService.findAllByForm("negativeCreate", tense);
+        List<Phrase> phrases = phraseService.findAllByFormAndTense("negativeCreate", tense);
         model.addAttribute("phrases", phrases);
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
         return "/" + first + "/" + tense + "/negative";

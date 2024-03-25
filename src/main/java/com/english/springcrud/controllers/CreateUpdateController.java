@@ -91,19 +91,18 @@ public class CreateUpdateController {
 
     @GetMapping("/{first}/{tense}/delete_phrase/{form}/{id}")
     public String deletePhrase(@PathVariable("first") String first,
-                               @PathVariable("id") Long id,
                                @PathVariable("tense") String tense,
-                               @PathVariable("form") String form) {
+                               @PathVariable("form") String form,
+                               @PathVariable("id") Long id) {
         phraseService.deleteById(id);
-
         return selectForm(form, "redirect:/" + first + "/" + tense + "/" + tense);
     }
 
     @GetMapping("/{first}/{tense}/{form}/{id}")
     public String updatePhraseForm(@PathVariable("first") String first,
-                                   @PathVariable("id") Long id,
                                    @PathVariable("tense") String tense,
                                    @PathVariable("form") String form,
+                                   @PathVariable("id") Long id,
                                    Model model, Principal principal) {
         PhraseDTO phraseDTO = convertToPhraseDTO(phraseService.findById(id));
         model.addAttribute("user", phraseService.getUserByPrincipal(principal));
